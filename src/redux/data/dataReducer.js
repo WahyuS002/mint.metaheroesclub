@@ -5,7 +5,10 @@ const initialState = {
     error: false,
     errorMsg: '',
     paused: false,
+    maxMintAmountPerTx: 0,
+    isWhitelistMintEnabled: false,
     currentWalletSupply: 0,
+    maxSupply: 0,
 }
 
 const dataReducer = (state = initialState, action) => {
@@ -26,7 +29,10 @@ const dataReducer = (state = initialState, action) => {
                 error: false,
                 errorMsg: '',
                 paused: action.payload.paused,
+                maxMintAmountPerTx: action.payload.maxMintAmountPerTx,
+                isWhitelistMintEnabled: action.payload.isWhitelistMintEnabled,
                 currentWalletSupply: action.payload.currentWalletSupply,
+                maxSupply: action.payload.maxSupply,
             }
         case 'CHECK_DATA_FAILED':
             return {

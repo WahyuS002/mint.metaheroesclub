@@ -64,7 +64,6 @@ export const connect = () => {
                 })
                 if (networkId == CONFIG.NETWORK.ID) {
                     const SmartContractObj = new Web3EthContract(abi, CONFIG.CONTRACT_ADDRESS)
-                    console.log('SMART CONTRACT OBJ:', SmartContractObj)
                     dispatch(
                         connectSuccess({
                             account: accounts[0],

@@ -1,7 +1,6 @@
 {
     "CONTRACT_ADDRESS": "0x59563C4756cb724eF22A9318f035441aBF47d18b",
     "SCAN_LINK": "https://etherscan.io/address/0x59563C4756cb724eF22A9318f035441aBF47d18b",
-    "MAX_SUPPLY_PER_ADDRESS": 20,
     "NETWORK": {
         "NAME": "Rinkeby",
         "SYMBOL": "ETH",
@@ -9,7 +8,6 @@
     },
     "NFT_NAME": "Meta Heroes Club",
     "SYMBOL": "MHC",
-    "MAX_SUPPLY": 999,
     "WEI_COST": 20000000000000000,
     "DISPLAY_COST": 0.02,
     "GAS_LIMIT": 285000,

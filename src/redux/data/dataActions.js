@@ -30,6 +30,12 @@ export const fetchData = () => {
             let cost = await store.getState().blockchain.smartContract.methods.cost().call()
             let paused = await store.getState().blockchain.smartContract.methods.paused().call()
             let maxMintAmountPerTx = await store.getState().blockchain.smartContract.methods.maxMintAmountPerTx().call()
+            let maxSupply = await store.getState().blockchain.smartContract.methods.maxSupply().call()
+            let isWhitelistMintEnabled = await store.getState().blockchain.smartContract.methods.whitelistMintEnabled().call()
+
+            let currentWallet = await store.getState().blockchain.account
+            let walletOfOwner = await store.getState().blockchain.smartContract.methods.walletOfOwner(currentWallet).call()
+            let currentWalletSupply = walletOfOwner.length
 
             // let OGCanMint = await store.getState().blockchain.smartContract.methods.OGCanMint().call()
 
@@ -43,6 +49,10 @@ export const fetchData = () => {
                     totalSupply,
                     cost,
                     paused,
+                    maxMintAmountPerTx,
+                    isWhitelistMintEnabled,
+                    currentWalletSupply,
+                    maxSupply,
                 })
             )
         } catch (err) {
