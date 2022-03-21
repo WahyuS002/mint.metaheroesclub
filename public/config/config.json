@@ -1,0 +1,19 @@
+{
+    "CONTRACT_ADDRESS": "0x6B0298A7f3747d079A53B6667991e61711d6d225",
+    "SCAN_LINK": "https://etherscan.io/address/0x6B0298A7f3747d079A53B6667991e61711d6d225",
+    "MAX_SUPPLY_PER_ADDRESS": 20,
+    "NETWORK": {
+        "NAME": "Ethereum",
+        "SYMBOL": "ETH",
+        "ID": 1
+    },
+    "NFT_NAME": "Headbox Squad",
+    "SYMBOL": "HBS",
+    "MAX_SUPPLY": 999,
+    "WEI_COST": 20000000000000000,
+    "DISPLAY_COST": 0.02,
+    "GAS_LIMIT": 285000,
+    "MARKETPLACE": "Opensea",
+    "MARKETPLACE_LINK": "https://opensea.io",
+    "SHOW_BACKGROUND": false
+}
