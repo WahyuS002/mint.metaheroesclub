@@ -1,14 +1,14 @@
 {
-    "CONTRACT_ADDRESS": "0x6B0298A7f3747d079A53B6667991e61711d6d225",
-    "SCAN_LINK": "https://etherscan.io/address/0x6B0298A7f3747d079A53B6667991e61711d6d225",
+    "CONTRACT_ADDRESS": "0x59563C4756cb724eF22A9318f035441aBF47d18b",
+    "SCAN_LINK": "https://etherscan.io/address/0x59563C4756cb724eF22A9318f035441aBF47d18b",
     "MAX_SUPPLY_PER_ADDRESS": 20,
     "NETWORK": {
-        "NAME": "Ethereum",
+        "NAME": "Rinkeby",
         "SYMBOL": "ETH",
-        "ID": 1
+        "ID": 4
     },
-    "NFT_NAME": "Headbox Squad",
-    "SYMBOL": "HBS",
+    "NFT_NAME": "Meta Heroes Club",
+    "SYMBOL": "MHC",
     "MAX_SUPPLY": 999,
     "WEI_COST": 20000000000000000,
     "DISPLAY_COST": 0.02,

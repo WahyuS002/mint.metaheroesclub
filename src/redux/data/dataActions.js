@@ -29,22 +29,20 @@ export const fetchData = () => {
             let totalSupply = await store.getState().blockchain.smartContract.methods.totalSupply().call()
             let cost = await store.getState().blockchain.smartContract.methods.cost().call()
             let paused = await store.getState().blockchain.smartContract.methods.paused().call()
-            let OGCanMint = await store.getState().blockchain.smartContract.methods.OGCanMint().call()
-            let currentWallet = await store.getState().blockchain.account
-            let walletOfOwner = await store.getState().blockchain.smartContract.methods.walletOfOwner(currentWallet).call()
-            let currentWalletSupply = walletOfOwner.length
+            let maxMintAmountPerTx = await store.getState().blockchain.smartContract.methods.maxMintAmountPerTx().call()
+
+            // let OGCanMint = await store.getState().blockchain.smartContract.methods.OGCanMint().call()
 
             // OG Can Mint
-            if (OGCanMint === true) {
-                cost = 0
-            }
+            // if (OGCanMint === true) {
+            //     cost = 0
+            // }
 
             dispatch(
                 fetchDataSuccess({
                     totalSupply,
                     cost,
                     paused,
-                    currentWalletSupply,
                 })
             )
         } catch (err) {
