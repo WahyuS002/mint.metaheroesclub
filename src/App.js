@@ -1,4 +1,5 @@
 import { utils } from 'ethers'
+import whitelistAddresses from './assets/whitelist.json'
 
 import { connect } from './redux/blockchain/blockchainActions'
 import { fetchData } from './redux/data/dataActions'
@@ -46,33 +47,47 @@ function App() {
             } else if (parseInt(mintAmount) + parseInt(data.totalSupply) > data.maxSupply) {
                 toast.warning('You have exceeded the max limit of minting.')
             } else {
-                let cost = data.cost
-                let gasLimit = CONFIG.GAS_LIMIT
-                let totalCostWei = String(cost * mintAmount)
-                let totalGasLimit = String(gasLimit * mintAmount)
-                toast.info(`Minting your ${CONFIG.NFT_NAME}...`)
-                setClaimingNft(true)
-                blockchain.smartContract.methods
-                    .mint(mintAmount)
-                    .send({
-                        gasLimit: String(totalGasLimit),
-                        to: CONFIG.CONTRACT_ADDRESS,
-                        from: blockchain.account,
-                        value: totalCostWei,
+                if (data.isWhitelistMintEnabled) {
+                    whitelistAddresses.some((element) => {
+                        if (element.toLowerCase() === blockchain.account.toLowerCase()) {
+                            return minting()
+                        } else {
+                            toast.error('This address is not whitelisted')
+                        }
                     })
-                    .once('error', (err) => {
-                        console.log(err)
-                        toast.error('Sorry, something went wrong please try again later.')
-                        setClaimingNft(false)
-                    })
-                    .then((receipt) => {
-                        console.log(receipt)
-                        toast.success(`WOW, the ${CONFIG.NFT_NAME} is yours! go visit Opensea.io to view it.`)
-                        setClaimingNft(false)
-                        dispatch(fetchData(blockchain.account))
-                    })
+                } else {
+                    minting()
+                }
             }
         }
+    }
+
+    const minting = () => {
+        let cost = data.cost
+        let gasLimit = CONFIG.GAS_LIMIT
+        let totalCostWei = String(cost * mintAmount)
+        let totalGasLimit = String(gasLimit * mintAmount)
+        toast.info(`Minting your ${CONFIG.NFT_NAME}...`)
+        setClaimingNft(true)
+        blockchain.smartContract.methods
+            .mint(mintAmount)
+            .send({
+                gasLimit: String(totalGasLimit),
+                to: CONFIG.CONTRACT_ADDRESS,
+                from: blockchain.account,
+                value: totalCostWei,
+            })
+            .once('error', (err) => {
+                console.log(err)
+                toast.error('Sorry, something went wrong please try again later.')
+                setClaimingNft(false)
+            })
+            .then((receipt) => {
+                console.log(receipt)
+                toast.success(`WOW, the ${CONFIG.NFT_NAME} is yours! go visit Opensea.io to view it.`)
+                setClaimingNft(false)
+                dispatch(fetchData(blockchain.account))
+            })
     }
 
     const decrementMintAmount = () => {
@@ -143,9 +158,11 @@ function App() {
                             <div className="flex justify-center mb-5">
                                 <div className="bg-[#212226] border-2 border-[#3E3E3E] px-2 py-1 rounded-full inline-block">
                                     <div className="flex items-center space-x-2">
-                                        <span className="w-3 h-3 rounded-full bg-green-400"></span>
+                                        {data.paused ? <span className="w-3 h-3 rounded-full bg-red-500"></span> : <span className="w-3 h-3 rounded-full bg-green-400"></span>}
 
-                                        <span className="font-poppins text-xs uppercase font-medium text-gray-300">{data.isWhitelistMintEnabled ? 'Whitelist Minting' : 'Public Minting'}</span>
+                                        <span className="font-poppins text-xs uppercase font-medium text-gray-300">
+                                            {data.paused ? 'Paused' : <>{data.isWhitelistMintEnabled ? 'Whitelist Minting' : 'Public Minting'}</>}
+                                        </span>
                                     </div>
                                 </div>
                             </div>
