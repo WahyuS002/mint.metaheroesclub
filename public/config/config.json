@@ -1,17 +1,14 @@
 {
-    "CONTRACT_ADDRESS": "0x9D3e99910F0568848E4Ae2db3f56C232C31B2EE5",
-    "SCAN_LINK": "https://etherscan.io/address/0x9D3e99910F0568848E4Ae2db3f56C232C31B2EE5",
+    "CONTRACT_ADDRESS": "0x8895B64E129fCD65B1A022a0B290A8716fD4aEFF",
+    "SCAN_LINK": "https://etherscan.io/address/0x8895B64E129fCD65B1A022a0B290A8716fD4aEFF",
     "NETWORK": {
-        "NAME": "Rinkeby",
+        "NAME": "Ethereum",
         "SYMBOL": "ETH",
-        "ID": 4
+        "ID": 1
     },
     "NFT_NAME": "Meta Heroes Club",
     "SYMBOL": "MHC",
-    "WEI_COST": 20000000000000000,
-    "DISPLAY_COST": 0.02,
     "GAS_LIMIT": 285000,
     "MARKETPLACE": "Opensea",
-    "MARKETPLACE_LINK": "https://opensea.io",
-    "SHOW_BACKGROUND": false
+    "MARKETPLACE_LINK": "https://opensea.io"
 }
