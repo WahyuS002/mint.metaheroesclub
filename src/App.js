@@ -154,13 +154,13 @@ function App() {
         <>
             <ToastContainer />
             <div className="min-h-screen font-caveat-brush selection:bg-primary selection:text-gray-800">
-                <a href="https://metaheroesclub.com/" target={'_blank'} className="flex justify-center md:block" rel="noreferrer">
-                    <img className="absolute w-72 p-5" draggable={false} src={logoYellow} alt="Logo Yellow" />
+                <a href="https://metaheroesclub.com/" target={'_blank'} className="flex justify-center relative" rel="noreferrer">
+                    <img className="absolute w-96 p-5 top-14" draggable={false} src={logoYellow} alt="Logo Yellow" />
                 </a>
                 <div className="hidden md:block">
                     <div className="absolute max-w-full inset-0 -z-20 min-h-screen bg-no-repeat bg-[url('./assets/background.png')] bg-cover"></div>
                 </div>
-                <div className="block md:hidden">
+                <div className="block md:hidden mt-12">
                     <div className="bg-[#0D0D0D] min-h-screen -z-20 absolute inset-0">
                         <p className="text-white absolute bottom-0">
                             <img src={backgroundImg} alt="Background_Image" />
@@ -169,86 +169,88 @@ function App() {
                 </div>
                 <div className="flex h-screen z-10">
                     <div className="m-auto">
-                        {blockchain.account && !data.loading ? (
-                            <div className="flex justify-center mb-5">
-                                <div className="bg-[#212226] border-2 border-[#3E3E3E] px-2 py-1 rounded-full inline-block">
-                                    <div className="flex items-center space-x-2">
-                                        {data.paused ? <span className="w-3 h-3 rounded-full bg-red-500"></span> : <span className="w-3 h-3 rounded-full bg-green-400"></span>}
+                        <div className="mt-16">
+                            {blockchain.account && !data.loading ? (
+                                <div className="flex justify-center mb-5">
+                                    <div className="bg-[#212226] border-2 border-[#3E3E3E] px-2 py-1 rounded-full inline-block">
+                                        <div className="flex items-center space-x-2">
+                                            {data.paused ? <span className="w-3 h-3 rounded-full bg-red-500"></span> : <span className="w-3 h-3 rounded-full bg-green-400"></span>}
 
-                                        <span className="font-poppins text-xs uppercase font-medium text-gray-300">
-                                            {data.paused ? 'Paused' : <>{data.isWhitelistMintEnabled ? 'Whitelist Minting' : 'Public Minting'}</>}
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                        ) : null}
-                        <div className="px-16 py-10 bg-[#2C2D31] space-y-7 rounded-3xl border-2 border-[#3E3E3E]">
-                            <h3 className="text-center text-2xl text-white">Mint your Metaheroes Club NFT</h3>
-
-                            {/* MINT WIDGET START */}
-                            <>
-                                <div className="flex justify-center space-x-5 select-none">
-                                    <div className="flex items-center">
-                                        <div
-                                            className={
-                                                (isContractReady() ? 'bg-primary hover:bg-yellow-400 transition-all duration-300 ease-in-out cursor-pointer' : 'bg-gray-200 cursor-not-allowed') +
-                                                ' w-8 h-8 border-2 border-white rounded-lg relative'
-                                            }
-                                            onClick={() => (isContractReady() ? decrementMintAmount() : null)}
-                                        >
-                                            <span className="text-3xl absolute -bottom-[0.15rem] left-[0.35rem] text-gray-800">-</span>
-                                        </div>
-                                    </div>
-                                    <span className="text-5xl text-white">{mintAmount}</span>
-                                    <div className="flex items-center">
-                                        <div
-                                            className={
-                                                (isContractReady() ? 'bg-primary hover:bg-yellow-400 transition-all duration-300 ease-in-out cursor-pointer' : 'bg-gray-200 cursor-not-allowed') +
-                                                ' w-8 h-8 border-2 border-white rounded-lg relative'
-                                            }
-                                            onClick={() => (isContractReady() ? incrementMintAmount() : null)}
-                                        >
-                                            <span className="text-3xl absolute -bottom-[0.15rem] left-[0.35rem] text-gray-800">+</span>
+                                            <span className="font-poppins text-xs uppercase font-medium text-gray-300">
+                                                {data.paused ? 'Paused' : <>{data.isWhitelistMintEnabled ? 'Whitelist Minting' : 'Public Minting'}</>}
+                                            </span>
                                         </div>
                                     </div>
                                 </div>
-                                {isContractReady() ? (
-                                    <div className="flex justify-center">
-                                        <button
-                                            className="bg-primary hover:bg-yellow-400 transition-all duration-300 ease-in-out hover:text-black px-12 py-2 rounded-xl text-3xl text-gray-800 border-4 border-white"
-                                            onClick={() => claimNFTs()}
-                                        >
-                                            Mint For {(utils.formatEther(data.cost, 'ether') * mintAmount).toFixed(3).replace(/(\.0+|0+)$/, '')}
-                                        </button>
-                                    </div>
-                                ) : null}
-                            </>
-                            {/* MINT WIDGET END */}
+                            ) : null}
+                            <div className="px-16 py-10 bg-[#2C2D31] space-y-7 rounded-3xl border-2 border-[#3E3E3E]">
+                                <h3 className="text-center text-2xl text-white">Mint your Metaheroes Club NFT</h3>
 
-                            {blockchain.account === '' || blockchain.smartContract === null ? (
-                                <div className="flex justify-center">
-                                    <button
-                                        className="bg-primary hover:bg-yellow-400 transition-all duration-300 ease-in-out hover:text-black px-12 py-2 rounded-xl text-3xl text-gray-800 border-4 border-white"
-                                        onClick={(e) => {
-                                            e.preventDefault()
-                                            dispatch(connect())
-                                            getData()
-                                        }}
-                                    >
-                                        Connect Wallet
-                                    </button>
-                                </div>
-                            ) : (
+                                {/* MINT WIDGET START */}
                                 <>
-                                    {data.loading ? (
+                                    <div className="flex justify-center space-x-5 select-none">
+                                        <div className="flex items-center">
+                                            <div
+                                                className={
+                                                    (isContractReady() ? 'bg-primary hover:bg-yellow-400 transition-all duration-300 ease-in-out cursor-pointer' : 'bg-gray-200 cursor-not-allowed') +
+                                                    ' w-8 h-8 border-2 border-white rounded-lg relative'
+                                                }
+                                                onClick={() => (isContractReady() ? decrementMintAmount() : null)}
+                                            >
+                                                <span className="text-3xl absolute -bottom-[0.15rem] left-[0.35rem] text-gray-800">-</span>
+                                            </div>
+                                        </div>
+                                        <span className="text-5xl text-white">{mintAmount}</span>
+                                        <div className="flex items-center">
+                                            <div
+                                                className={
+                                                    (isContractReady() ? 'bg-primary hover:bg-yellow-400 transition-all duration-300 ease-in-out cursor-pointer' : 'bg-gray-200 cursor-not-allowed') +
+                                                    ' w-8 h-8 border-2 border-white rounded-lg relative'
+                                                }
+                                                onClick={() => (isContractReady() ? incrementMintAmount() : null)}
+                                            >
+                                                <span className="text-3xl absolute -bottom-[0.15rem] left-[0.35rem] text-gray-800">+</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {isContractReady() ? (
                                         <div className="flex justify-center">
-                                            <button className="bg-primary hover:bg-yellow-400 transition-all duration-300 ease-in-out hover:text-black px-12 py-2 rounded-xl text-3xl text-gray-800 border-4 border-white">
-                                                Loading . . .
+                                            <button
+                                                className="bg-primary hover:bg-yellow-400 transition-all duration-300 ease-in-out hover:text-black px-12 py-2 rounded-xl text-3xl text-gray-800 border-4 border-white"
+                                                onClick={() => claimNFTs()}
+                                            >
+                                                Mint For {(utils.formatEther(data.cost, 'ether') * mintAmount).toFixed(3).replace(/(\.0+|0+)$/, '')}
                                             </button>
                                         </div>
                                     ) : null}
                                 </>
-                            )}
+                                {/* MINT WIDGET END */}
+
+                                {blockchain.account === '' || blockchain.smartContract === null ? (
+                                    <div className="flex justify-center">
+                                        <button
+                                            className="bg-primary hover:bg-yellow-400 transition-all duration-300 ease-in-out hover:text-black px-12 py-2 rounded-xl text-3xl text-gray-800 border-4 border-white"
+                                            onClick={(e) => {
+                                                e.preventDefault()
+                                                dispatch(connect())
+                                                getData()
+                                            }}
+                                        >
+                                            Connect Wallet
+                                        </button>
+                                    </div>
+                                ) : (
+                                    <>
+                                        {data.loading ? (
+                                            <div className="flex justify-center">
+                                                <button className="bg-primary hover:bg-yellow-400 transition-all duration-300 ease-in-out hover:text-black px-12 py-2 rounded-xl text-3xl text-gray-800 border-4 border-white">
+                                                    Loading . . .
+                                                </button>
+                                            </div>
+                                        ) : null}
+                                    </>
+                                )}
+                            </div>
                         </div>
                     </div>
                 </div>
