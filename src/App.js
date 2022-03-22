@@ -160,7 +160,7 @@ function App() {
                 <div className="hidden md:block">
                     <div className="absolute max-w-full inset-0 -z-20 min-h-screen bg-no-repeat bg-[url('./assets/background.png')] bg-cover"></div>
                 </div>
-                <div className="block md:hidden mt-12">
+                <div className="block md:hidden md:mt-12">
                     <div className="bg-[#0D0D0D] min-h-screen -z-20 absolute inset-0">
                         <p className="text-white absolute bottom-0">
                             <img src={backgroundImg} alt="Background_Image" />
@@ -169,7 +169,7 @@ function App() {
                 </div>
                 <div className="flex h-screen z-10">
                     <div className="m-auto">
-                        <div className="mt-16">
+                        <div className="md:mt-16">
                             {blockchain.account && !data.loading ? (
                                 <div className="flex justify-center mb-5">
                                     <div className="bg-[#212226] border-2 border-[#3E3E3E] px-2 py-1 rounded-full inline-block">
